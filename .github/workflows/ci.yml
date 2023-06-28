@@ -12,7 +12,7 @@ jobs:
 
       - name: Install and build
         run: |
-          npm cli
+          npm ci
           npm run build
 
       - name: Deploy 🚀
