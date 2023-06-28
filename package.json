@@ -2,6 +2,7 @@
   "name": "github-actions-demo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://hi-fullmoon.github.io/github-actions-demo",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
