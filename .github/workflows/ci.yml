@@ -6,16 +6,22 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [15]
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@main
-
-      - name: Install and build
-        run: |
-          npm install
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@main
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          folder: build # The folder the action should deploy.
+          version: 8
+      - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+            cache: 'pnpm'
+      - name: Install dependencies
+          run: pnpm install && pnpm build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .next 
